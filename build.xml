@@ -1,0 +1,40 @@
+<project name="Hash" basedir=".">
+  
+  <property name="classes" location="classes" />
+  <property name="src" location="src" />
+  <property name="jarname" value="Hash.jar" />
+  
+  <target name="compile">
+    <mkdir dir="${classes}" />
+    <javac srcdir="${src}" destdir="${classes}" includeantruntime="no" />
+  </target>
+  
+  <target name="archive">
+    <jar destfile="${jarname}" basedir="${classes}" update="no">
+      <manifest>
+        <attribute name="Main-class" value="Start" />
+      </manifest>
+    </jar>
+  </target>
+  
+  <target name="run">
+    <java jar="${jarname}" fork="yes" />
+  </target>
+  
+  <target name="build">
+    <antcall target="compile" />
+    <antcall target="archive" />
+  </target>
+  
+  <target name="runall">
+    <antcall target="build" />
+    <antcall target="run" />
+  </target>
+  
+  <target name="clean">
+    <delete file="${jarname}" />
+    <delete dir="${classes}" />
+  </target>
+
+</project>
+
